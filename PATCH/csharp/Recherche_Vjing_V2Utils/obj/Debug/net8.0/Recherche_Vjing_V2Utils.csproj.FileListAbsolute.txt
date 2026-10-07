@@ -1,0 +1,14 @@
+D:\PROJET\_Vjing\Moulinette\PATCH\csharp\Recherche_Vjing_V2Utils\bin\Debug\net8.0\Recherche_Vjing_V2Utils.deps.json
+D:\PROJET\_Vjing\Moulinette\PATCH\csharp\Recherche_Vjing_V2Utils\bin\Debug\net8.0\Recherche_Vjing_V2Utils.dll
+D:\PROJET\_Vjing\Moulinette\PATCH\csharp\Recherche_Vjing_V2Utils\bin\Debug\net8.0\Recherche_Vjing_V2Utils.pdb
+D:\PROJET\_Vjing\Moulinette\PATCH\csharp\Recherche_Vjing_V2Utils\bin\Debug\net8.0\Recherche_Vjing_V2Utils.xml
+D:\PROJET\_Vjing\Moulinette\PATCH\csharp\Recherche_Vjing_V2Utils\obj\Debug\net8.0\Recherche_Vjing_V2Utils.csproj.AssemblyReference.cache
+D:\PROJET\_Vjing\Moulinette\PATCH\csharp\Recherche_Vjing_V2Utils\obj\Debug\net8.0\Recherche_Vjing_V2Utils.GeneratedMSBuildEditorConfig.editorconfig
+D:\PROJET\_Vjing\Moulinette\PATCH\csharp\Recherche_Vjing_V2Utils\obj\Debug\net8.0\Recherche_Vjing_V2Utils.AssemblyInfoInputs.cache
+D:\PROJET\_Vjing\Moulinette\PATCH\csharp\Recherche_Vjing_V2Utils\obj\Debug\net8.0\Recherche_Vjing_V2Utils.AssemblyInfo.cs
+D:\PROJET\_Vjing\Moulinette\PATCH\csharp\Recherche_Vjing_V2Utils\obj\Debug\net8.0\Recherche_Vjing_V2Utils.csproj.CoreCompileInputs.cache
+D:\PROJET\_Vjing\Moulinette\PATCH\csharp\Recherche_Vjing_V2Utils\obj\Debug\net8.0\Recherche_Vjing_V2Utils.dll
+D:\PROJET\_Vjing\Moulinette\PATCH\csharp\Recherche_Vjing_V2Utils\obj\Debug\net8.0\refint\Recherche_Vjing_V2Utils.dll
+D:\PROJET\_Vjing\Moulinette\PATCH\csharp\Recherche_Vjing_V2Utils\obj\Debug\net8.0\Recherche_Vjing_V2Utils.xml
+D:\PROJET\_Vjing\Moulinette\PATCH\csharp\Recherche_Vjing_V2Utils\obj\Debug\net8.0\Recherche_Vjing_V2Utils.pdb
+D:\PROJET\_Vjing\Moulinette\PATCH\csharp\Recherche_Vjing_V2Utils\obj\Debug\net8.0\ref\Recherche_Vjing_V2Utils.dll

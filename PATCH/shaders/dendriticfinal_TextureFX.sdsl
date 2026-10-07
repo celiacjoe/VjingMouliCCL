@@ -1,0 +1,28 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+shader dendriticfinal_TextureFX : TextureFX, Global
+{
+SamplerState samplerState
+{
+Filter = MIN_MAG_MIP_LINEAR;
+};
+float reg01;
+float noir;
+int2 resolution;
+float mvt;
+    stage override float4 Shading()
+    {
+    float2 uv = streams.TexCoord.xy;
+    float2 res = float2(resolution);
+    float3 t0 = Texture2.SampleLevel(samplerState, uv , 0).xyz;
+    float3 t1 = Texture1.SampleLevel(samplerState, uv , 0).xyz;
+    float3 t2 = Texture0.SampleLevel(samplerState, uv+(t1.xy/res)*mvt*8.,0).xyz;
+    float dd = length(t1.xy);
+    float d = pow(1.-dd,40.*reg01);
+    float3 t3 = min(lerp(t0,t2,1.-d),max(t2+0.01,d));
+   // float3 t4 =lerp(float3(1.,1.,1.),3.*abs(1.-2.*frac(dd+float3(0.,-1./3.,1./3.)))-1.,1.-dd)*(1.-dd);
+      //  return float4(lerp(t3*clamp(noir*3.,0.,1.),t4,0.01*smoothstep(0.8,1.,sin(Time))*clamp(noir*3.-1.7,0.,1.)),1.);
+       return float4(t3,1.);
+    }
+};

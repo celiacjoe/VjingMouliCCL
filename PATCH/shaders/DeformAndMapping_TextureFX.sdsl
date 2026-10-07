@@ -1,0 +1,62 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+shader DeformAndMapping_TextureFX : TextureFX
+{
+                 SamplerState samplerState
+{
+Filter = MIN_MAG_MIP_LINEAR;
+AddressU = Mirror;
+    AddressV = mirror;
+
+};
+float cross2d(  float2 a,  float2 b ) { return a.x*b.y - a.y*b.x; }
+float2 form(  float2 p,  float2 a,  float2 b,  float2 c,  float2 d )
+{
+    float2 res = float2(-1.0,-1.);
+
+    float2 e = b-a;
+    float2 f = d-a;
+    float2 g = a-b+c-d;
+    float2 h = p-a;
+        
+    float k2 = cross2d( g, f );
+    float k1 = cross2d( e, f ) + cross2d( h, g );
+    float k0 = cross2d( h, e );
+    
+    // if edges are parallel, this is a linear equation
+    if( abs(k2)<0.001 )
+    {
+        res = float2( (h.x*k1+f.x*k0)/(e.x*k1-g.x*k0), -k0/k1 );
+    }
+    // otherwise, it's a quadratic
+	else
+    {
+        float w = k1*k1 - 4.0*k0*k2;
+        if( w<0.0 ) return float2(-1.0,-1.);
+        w = sqrt( w );
+
+        float ik2 = 0.5/k2;
+        float v = (-k1 - w)*ik2;
+        float u = (h.x - f.x*v)/(e.x + g.x*v);
+        
+        if( u<0.0 || u>1.0 || v<0.0 || v>1.0 )
+        {
+           v = (-k1 + w)*ik2;
+           u = (h.x - f.x*v)/(e.x + g.x*v);
+        }
+        res = float2( u, v );
+    }
+    
+    return res;
+}
+float2 a;float2 b; float2 c; float2 d;
+    stage override float4 Shading()
+    {
+     float2 uv = (streams.TexCoord.xy);
+     float2 uf = form(uv,a,b,d,c);
+            float3 c1 = Texture0.SampleLevel(samplerState, uf, 0).xyz;
+         
+        return float4(c1,step(0.,uv.x)*step(uv.x,1.)*step(0.,uv.y)*step(uv.y,1.));
+    }
+};

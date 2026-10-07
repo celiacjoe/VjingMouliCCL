@@ -1,0 +1,57 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+shader Liquide01_TextureFX : TextureFX, Global
+{
+   SamplerState samplerState
+{
+Filter = MIN_MAG_MIP_LINEAR;
+};
+float2 res;
+float _reg1mask;
+float _reg2mask;
+float _ApparitionForme;
+float _disparition;
+float _taille;
+float _forme;
+float4 tex( float2 g, float2 p, float2 s) {
+	float2 gp = g + p;
+	if (gp.x >= s.x) gp.x = gp.x - s.x;
+	if (gp.y >= s.y) gp.y = gp.y - s.y;
+	if (gp.x < 0.0) gp.x = s.x + gp.x;
+	if (gp.y < 0.0) gp.y = s.y + gp.y;
+	return Texture0.SampleLevel(samplerState, gp / s + 0.5 / s, 0);
+}
+float4 getState( float2 g, float2 s, float n) {
+	float4 p = float4(0.,0.,0.,0.);
+	for (float i = 0.; i < n; i++) { p = tex( g, -p.xy, s); }
+	return p;
+}
+    stage override float4 Shading()
+    {
+		float2 uv  = streams.TexCoord.xy;
+		float2 g = uv*res;
+		  g += ((g / res) - 0.5) * float2(res.x / res.y, 1.) * -_forme * 4.;
+	
+
+	float tt = 0.1+_taille*3.;
+	float4 r = tex( g, float2(tt, 0), res);
+	float4 t = tex( g, float2(0, tt), res);
+	float4 l = tex( g, float2(-tt, 0), res);
+	float4 b = tex( g, float2(0, -tt), res);
+
+	float2 c = sin(uv * 6.28318)*.5 + .5;
+	float cc = c.x + c.y;	
+	float4 rf = getState( g, res, cc * 2. + 1.);
+	rf += float4(r.z - l.z, t.z - b.z,0.,0.);
+	float4 dp = (r + t + l + b) / 4.;
+	float div = ((l - r).x + (b - t).y) / 20.;
+	rf = float4(rf.xy,dp.z - div, rf.a);
+    float ma = smoothstep(_reg1mask, _reg2mask, Texture1.SampleLevel(samplerState, uv, 0).x);
+    //ma = smoothstep(0.2, 0., length(uv - float2(sin(Time * 0.1) * 0.5 + 0.5, cos(Time * 0.1) * 0.5 + 0.5)));
+   rf = lerp(rf * (1. - _disparition * 0.02), float4(0.5, 0.5, 0.5, 0.5), _ApparitionForme * ma);
+
+		 //float4 t1 = Texture0.SampleLevel(samplerState,uv , 0).z;
+        return rf;
+    }
+};

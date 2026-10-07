@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PublicChannels>
+  <Channel Name="blur_img" Type="Float32 [Primitive]" />
+  <Channel Name="blur_mask" Type="Float32 [Primitive]" />
+  <Channel Name="G_LFO_value" Type="Float32 [Primitive]" />
+  <Channel Name="G_period" Type="Float32 [Primitive]" />
+  <Channel Name="Gradient_MaskTwick" Type="Float32 [Primitive]" />
+  <Channel Name="Gradient_Twick" Type="Float32 [Primitive]" />
+  <Channel Name="LFO_MapMirror" Type="Float32 [Primitive]" />
+  <Channel Name="LFO_RemapPeriod" Type="Float32 [Primitive]" />
+  <Channel Name="lfo_t" Type="Float32 [Primitive]" />
+  <Channel Name="Sound" Type="Float32 [Primitive]" />
+  <Channel Name="SoundTog" Type="Float32 [Primitive]" />
+</PublicChannels>

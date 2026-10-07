@@ -1,0 +1,32 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+[WantsMips("Texture0")]
+shader fusionChannel_TextureFX : TextureFX
+{
+   SamplerState samplerState
+{
+Filter = MIN_MAG_MIP_LINEAR;
+AddressU = Mirror;
+    AddressV = mirror;
+};
+float z1;
+float z2;
+float2 p1;
+float2 p2;
+float map(float value, float min1, float max1, float min2, float max2) {
+  return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
+}
+    stage override float4 Shading()
+    {
+        float2 uv = (streams.TexCoord.xy);
+        float zz1= 1.+2.*z1;
+      float2 ut1 = float2(map(uv.x+p1.x*z1*2.,0.,zz1,0.,1.),map(uv.y+(1.-p1.y)*z1*2.,0.,zz1,0.,1.));
+      float zz2= 1.+2.*z2;
+      float2 ut2 = float2(map(uv.x+p2.x*z2*2.,0.,zz2,0.,1.),map(uv.y+(1.-p2.y)*z2*2.,0.,zz2,0.,1.));
+      float c1 = Texture0.SampleLevel(samplerState, ut1, 0).x;
+      float c2 = Texture1.SampleLevel(samplerState, ut2, 0).x;
+      float3 cf = float3(c1,c2,0.);
+        return float4(cf,1.);
+    }
+};

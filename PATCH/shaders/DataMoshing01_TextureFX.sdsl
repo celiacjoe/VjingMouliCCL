@@ -1,0 +1,16 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+shader DataMoshing01_TextureFX : TextureFX
+{
+SamplerState samplerState{Filter = MIN_MAG_MIP_LINEAR;};
+
+    stage override float4 Shading()
+    {
+    float2 uv = (streams.TexCoord.xy);
+    float4 r ; 
+    r.x = dot(Texture1.SampleLevel(samplerState,uv,0).xyz,float3(0.3,0.3,0.3));
+    r.yzw = Texture0.SampleLevel(samplerState,uv,0).rgb;
+        return r;
+    }
+};

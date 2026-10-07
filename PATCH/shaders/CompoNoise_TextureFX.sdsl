@@ -1,0 +1,43 @@
+﻿[TextureSource]
+[Category("Source")]
+[Summary("")]
+shader CompoNoise_TextureFX : TextureFX, Global
+{
+         SamplerState samplerState
+{
+Filter = MIN_MAG_MIP_LINEAR;
+AddressU = Mirror;
+    AddressV = mirror;
+};
+float2 res;
+float noise;
+float dither;
+float sharpen;
+float3 hs(float2 uv) { float2 u = uv * res / 1024.; return sin(Texture1.SampleLevel(samplerState,u, 0).xyz*6.28318530718 + Time*24.)*0.5 + 0.5; }
+			float3 hn(float2 uv) { float2 u = uv *res/ 1024.; return Texture1.SampleLevel(samplerState,u, 0).xyz; }
+float ov(float a, float b) {
+				return a > 0.5 ? 2.*a*b : 1. - 2.*(1. - a)*(1. - b);}
+float3 ov3(float3 B, float3 S)
+{
+    float3 low  = 2.0 * B * S;
+    float3 high = 1.0 - 2.0 * (1.0 - B) * (1.0 - S);
+    float3 mask = step(B, 0.5);
+    return lerp(high, low, mask);
+}
+    stage override float4 Shading()
+    {
+          float2 uv = (streams.TexCoord.xy);
+   // float3 t = Texture0.SampleLevel(samplerState, uv, 0).xyz;
+    float3 up = Texture0.SampleLevel(samplerState, uv + float2 (0, 1)/res, 0).xyz;
+    float3 left = Texture0.SampleLevel(samplerState, uv + float2 (-1, 0)/res, 0).xyz;
+    float3 center = Texture0.SampleLevel(samplerState, uv, 0).xyz;
+    float3 right = Texture0.SampleLevel(samplerState, uv + float2 (1, 0)/res, 0).xyz;
+    float3 down = Texture0.SampleLevel(samplerState, uv + float2 (0, -1)/res, 0).xyz;
+    float s = sharpen;
+    float3 t =  (1.0 + 4.0*s)*center -s*(up + left + right + down);
+    float ta = 1.+clamp(noise-1.,0.,1.)*0.5;
+    float3 r1 =  smoothstep(-0.05,1.05,ov3(pow(t,float3(ta,ta,ta)), lerp(0.5, hs(uv ), noise)));
+       float3 r = lerp(r1,step(hn(uv + 98.),r1),dither);
+        return float4(r,1.);
+    }
+};

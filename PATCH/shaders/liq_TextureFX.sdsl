@@ -1,0 +1,60 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+shader liq_TextureFX : TextureFX,Global
+{
+SamplerState samplerState
+{
+Filter = MIN_MAG_MIP_LINEAR;
+
+};
+int2 resolution;
+float _r1;
+float _r2;
+float _r3;
+float t1;
+float t1b;
+float t2;
+float t2b;
+float t3;
+float t4;
+//float t5;
+//float t6;
+float2x2 rt(float t) { float c = cos(t); float s = sin(t); return float2x2(c, -s, s, c); }
+float rd(float t) { return frac(sin(dot(floor(t), 45.236))*7845.236); }
+float no(float t) { return lerp(rd(t), rd(t + 1.), smoothstep(0., 1., frac(t))); }
+
+float getRot(float2 pos, float2 b, float3 n)
+{
+	float2 p = b * t1;
+	float rot = 0.0;
+	float2 res = float2(resolution);
+	for (int i = 0; i < 7; i++)
+	{
+		rot += dot(Texture0.SampleLevel(samplerState,frac((pos + p) / res) ,0).xy - float2(0.5,0.5), p.yx*n.xy);
+		p = mul(p,rt(n.z)*t2);
+	}
+	return rot / dot(b, b);
+}
+    stage override float4 Shading()
+    {
+        float2 uv = (streams.TexCoord.xy);
+        float2 res = float2(resolution);
+        float2 pos = uv*res;
+      	float ds = Texture1.SampleLevel(samplerState, uv, 0).y;
+      	//float3 ba = smoothstep(t5,t6,Texture1.SampleLevel(samplerState, uv, 0).xyz);
+				float3 ba =Texture1.SampleLevel(samplerState, uv, 0).xyz;
+      	float n1 = (smoothstep(_r2, _r3, ds) - 0.5)*2.;
+      	float n3 = t3 *6.28;
+      	float2 b = lerp(float2(n1, lerp(-n1,n1,t1b)), float2(cos(n1), sin(n1)), t2b);
+      	float2 v = float2(0.,0.);
+      	float2 p = b * t1;
+      	for (int i = 0; i < 7; i++)
+      	{
+      		v += p.yx*getRot(pos + p, b, float3(n1, n1, n3));
+      		p = mul(p,rt(n3)*t2);
+      	}
+      	float3 r1 = lerp(ba,Texture0.SampleLevel(samplerState, frac((pos + v * float2(-1, 1)*0.1*pow(t4,2.)) / res) ,0).xyz, 1. - pow(ds,_r1));
+        return clamp(float4(r1,ds),0.,1.);
+    }
+};

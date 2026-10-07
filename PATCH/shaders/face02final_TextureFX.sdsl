@@ -1,0 +1,26 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+shader face02final_TextureFX : TextureFX, Global
+{
+     SamplerState samplerState
+{
+Filter = MIN_MAG_MIP_LINEAR;
+AddressU = Mirror;
+    AddressV = mirror;
+};
+float2 res;
+float dither;
+float hs(float2 uv) { float2 u = uv * res / 1024.; return sin(Texture1.SampleLevel(samplerState,u, 0).x*6.28318530718 + Time*24.)*0.5 + 0.5; }
+			float hn(float2 uv) { float2 u = uv *res/ 1024.; return Texture1.SampleLevel(samplerState,u, 0).x; }
+float ov(float a, float b) {
+				return a > 0.5 ? 2.*a*b : 1. - 2.*(1. - a)*(1. - b);}
+    stage override float4 Shading()
+    {
+     float2 uv = (streams.TexCoord.xy);
+    float t = Texture0.SampleLevel(samplerState, uv, 0).x;
+    float r1 =  smoothstep(0.05,0.95,ov(t, lerp(0.5, hs(uv ), 0.1)));
+       float r = lerp(r1,step(hn(uv + 98.),r1),dither);
+        return float4(r,r,r,1.);
+    }
+};

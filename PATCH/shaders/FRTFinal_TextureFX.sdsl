@@ -1,0 +1,71 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+shader FRTFinal_TextureFX : TextureFX
+{
+SamplerState samplerState{Filter = MIN_MAG_MIP_LINEAR;};
+SamplerState samplerPoint { Filter = MIN_MAG_MIP_POINT; };
+
+float ov(float x, float y){if (x < 0.5)return 2.0*x*y;
+else return 1.0 - 2.0*(1.0 - x)*(1.0 - y);}
+float3 ov3 (float3 a , float3 b){return float3 (ov(a.x,b.x),ov(a.y,b.y),ov(a.z,b.z));}
+float rd (float t) {return frac(sin(dot(floor(t),12.45))*4597.268);}
+float no (float t) {return lerp(rd(t),rd(t+1.0),smoothstep(0.,1.,frac(t)));}
+ 
+ float2 _resolution;
+ float _time;
+float4 nm ( float2 uv , float _r, float _s ){
+					 float2 texel =_r;
+                     float2 n  = float2(0.0, texel.y);
+                     float2 e  = float2(texel.x, 0.0);
+                     float2 s  = float2(0.0, -texel.y);
+                     float2 w  = float2(-texel.x, 0.0);
+    float d   = Texture0.SampleLevel(samplerState,  uv,0).y;
+    float d_n  = Texture0.SampleLevel(samplerState,  frac(uv+n)  ,0).y;
+    float d_e  = Texture0.SampleLevel(samplerState,  frac(uv+e)  ,0).y;
+    float d_s  = Texture0.SampleLevel(samplerState,  frac(uv+s)  ,0).y;
+    float d_w  = Texture0.SampleLevel(samplerState,  frac(uv+w)  ,0).y; 
+    float d_ne = Texture0.SampleLevel(samplerState,  frac(uv+n+e),0).y;
+    float d_se = Texture0.SampleLevel(samplerState,  frac(uv+s+e),0).y;
+    float d_sw = Texture0.SampleLevel(samplerState,  frac(uv+s+w),0).y;
+    float d_nw = Texture0.SampleLevel(samplerState,  frac(uv+n+w),0).y; 
+
+    float dxn[3];float dyn[3];float dcn[3];
+    dcn[0] = 0.5;dcn[1] = 1.0; dcn[2] = 0.5;dyn[0] = d_nw - d_sw;dyn[1] = d_n  - d_s; dyn[2] = d_ne - d_se;
+    dxn[0] = d_ne - d_nw; dxn[1] = d_e  - d_w; dxn[2] = d_se - d_sw; float den = 0.0;float3 avd = float3(0.,0.,0.);
+    float ma = d+d_n+d_e+d_s+d_w+d_ne+d_se+d_sw+d_nw/9.;
+    for(int i = 0; i < 3; i++) {for(int j = 0; j < 3; j++) {float2 dxy = float2(dxn[i], dyn[j]);float w = dcn[i] * dcn[j];float3 bn = reflect(normalize(float3(_s*dxy, -1.0)), float3(0,1,0));
+            avd += w * bn;den += w;}}return  float4(avd /= den,ma);} 	
+
+            float COLORS;
+            float _r1;
+            float _r2;
+            float _r3;
+            float _r4;
+            float2 LUTres;
+    stage override float4 Shading()
+    {
+    float2 uv = streams.TexCoord.xy;
+    float maxColor = COLORS - 1.0;
+                float3 col = saturate( Texture1.SampleLevel(samplerState,uv,0)).xyz*saturate( Texture1.SampleLevel(samplerState,uv,0)).a;
+                float c2 =  smoothstep(_r3,_r4,dot(col,float3(0.3,0.59,0.11)));
+                float3 nor = nm( uv,_r1,_r2);
+                float ft = (abs(nor.x)+abs(nor.y));
+                float3 hu = saturate(3.0*abs(1.0-2.0*frac(ft+float3(0.0,-1.0/3.0,1.0/3.0)))-1);
+                float3 fin = lerp(hu*ft,col, saturate( Texture1.SampleLevel(samplerState,uv,0)).a);
+               /* float halfColX = 0.5 / LUTres.x;
+                float halfColY = 0.5 / LUTres.y;
+                float threshold = maxColor / COLORS;
+                float xOffset = halfColX + fin.r * threshold / COLORS;
+                float yOffset = halfColY + fin.g * threshold;
+                float cell = floor(fin.b * maxColor);
+                float2 lutPos = float2(cell / COLORS + xOffset, yOffset);
+                float3 fr = Texture2.SampleLevel(samplerPoint, lutPos,0).xyz;*/
+                float t = Texture0.SampleLevel(samplerState,  uv,0).y;
+                float nb = lerp(c2,1.-c2,t);
+                float3 fr3 = float3 (nb,nb,nb);
+                float3 resu = lerp(fin,fr3,step(0.75,rd(_time*60.)));
+				return float4(resu,1.);
+      
+    }
+};

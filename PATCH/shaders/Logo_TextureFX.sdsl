@@ -1,0 +1,30 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+shader Logo_TextureFX : TextureFX
+{
+float ta;
+float pui;
+float ap;
+float nn;
+SamplerState samplerState {Filter = MIN_MAG_MIP_LINEAR;};
+float ov(float a, float b) {
+                return a > 0.5 ? 2.*a*b : 1. - 2.*(1. - a)*(1. - b);
+            }
+float3 ov(float3 a, float3 b){ return float3 (ov(a.x,b.x),ov(a.y,b.y),ov(a.z,b.z));}
+    stage override float4 Shading()
+    {
+     float2 uv = (streams.TexCoord.xy);
+     float2 e = float2 (0.01*ta,0.);
+     float n1 =   Texture0.SampleLevel(samplerState, uv+e.xy, 0).a;
+     float n2 =   Texture0.SampleLevel(samplerState, uv-e.xy, 0).a;
+     float n3 =   Texture0.SampleLevel(samplerState, uv+e.yx, 0).a;
+     float n4 =   Texture0.SampleLevel(samplerState, uv-e.yx, 0).a;
+     float2 n = float2(n1-n2,n3-n4)*nn;
+     float3 c1 = Texture1.SampleLevel(samplerState, uv+(smoothstep(0.,1.,n*0.5+0.5)-0.5)*0.2, 0).xyz;
+     float l =  max(1.-Texture2.SampleLevel(samplerState, uv, 0).x,Texture0.SampleLevel(samplerState, uv+n*0.01*pui, 0).a*0.99);
+     float pl = lerp(0.5,0.,smoothstep(ap,1.,l));
+     c1 = ov(c1,float3(pl,pl,pl));
+        return float4(float3(c1),l);
+    }
+};

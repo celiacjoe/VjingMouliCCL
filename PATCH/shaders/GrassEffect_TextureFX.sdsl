@@ -1,0 +1,26 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+shader GrassEffect_TextureFX : TextureFX
+{
+      SamplerState samplerState
+{
+Filter = MIN_MAG_MIP_LINEAR;
+AddressU = Mirror;
+    AddressV = mirror;
+};
+float m1;
+float m2;
+float so;
+    stage override float4 Shading()
+    {
+    float2 uv = (streams.TexCoord.xy);
+    float3  c = Texture1.SampleLevel(samplerState, uv, 0).xyz;
+    float m = smoothstep(m1,m2,c.y);
+    c *= m;
+    c = max(Texture0.SampleLevel(samplerState, uv, 0).xyz*0.95,c);
+    c = lerp(Texture1.SampleLevel(samplerState, uv, 0).xyz,c,0.98*so);
+    
+        return  float4(c,1.);
+    }
+};

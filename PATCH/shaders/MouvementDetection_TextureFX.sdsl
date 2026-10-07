@@ -1,0 +1,47 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+[WantsMips("Texture0")]
+shader MouvementDetection_TextureFX : TextureFX, Global
+{
+                 SamplerState samplerState
+{
+Filter = MIN_MAG_MIP_POINT;
+AddressU = WRAP;
+    AddressV = WRAP;
+};
+float rd(float t){ return frac(sin(floor(t)*45.)*7845.236);}
+float no(float t){return lerp(rd(t), rd(t+1.),smoothstep(0.,1.,frac(t)));}
+int2 resolution;
+float2 pos;
+float2 ppos;
+//float score;
+float nn;
+float ra;
+float f3;
+float li(float2 a, float2 b,float2 p){ float2 ba  = b-a; float2 pa = p-a; float h=  clamp(dot(pa,ba)/dot(ba,ba),0.,1.);
+                return length(pa-ba*h);}
+    stage override float4 Shading()
+    {
+     float2 uv = (streams.TexCoord.xy);
+     float2 uc = uv;
+       float fac = ra;
+       float2 rra = float2(ra,1.);
+       float2 up = uv;
+    up.x *= fac;
+    float nb = nn;
+     up = floor(up*nb)/nb+0.5/(nb*rra);
+    up.x /=fac;
+    float ta = Texture0.SampleLevel(samplerState,uc,0).x;
+    float tb =  Texture1.SampleLevel(samplerState,uc,0).x;
+float diff = abs(ta - tb);
+diff = smoothstep(0., 0.2, diff);
+float tc = 0.;
+diff = max(diff,  Texture0.SampleLevel(samplerState,uc,0).y*0.95);
+
+        return float4(lerp(tb, ta, 0.5), diff, 0.,1.);
+
+
+
+    }
+};

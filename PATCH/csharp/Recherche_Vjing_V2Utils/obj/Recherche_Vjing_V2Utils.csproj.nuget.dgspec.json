@@ -1,0 +1,78 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\PROJET\\_Vjing\\Moulinette\\PATCH\\csharp\\Recherche_Vjing_V2Utils\\Recherche_Vjing_V2Utils.csproj": {}
+  },
+  "projects": {
+    "D:\\PROJET\\_Vjing\\Moulinette\\PATCH\\csharp\\Recherche_Vjing_V2Utils\\Recherche_Vjing_V2Utils.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\PROJET\\_Vjing\\Moulinette\\PATCH\\csharp\\Recherche_Vjing_V2Utils\\Recherche_Vjing_V2Utils.csproj",
+        "projectName": "Recherche_Vjing_V2Utils",
+        "projectPath": "D:\\PROJET\\_Vjing\\Moulinette\\PATCH\\csharp\\Recherche_Vjing_V2Utils\\Recherche_Vjing_V2Utils.csproj",
+        "packagesPath": "C:\\Users\\conta\\.nuget\\packages\\",
+        "outputPath": "D:\\PROJET\\_Vjing\\Moulinette\\PATCH\\csharp\\Recherche_Vjing_V2Utils\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "D:\\PROJET\\_Vjing\\Moulinette\\PATCH\\csharp\\Recherche_Vjing_V2Utils\\NuGet.Config",
+          "C:\\Users\\conta\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://teamcity.vvvv.org/guestAuth/app/nuget/v1/FeedService.svc/": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "framework": "net8.0",
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.400"
+      },
+      "frameworks": {
+        "net8.0": {
+          "framework": "net8.0",
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "VL.Core": {
+              "target": "Package",
+              "version": "[2025.7.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.400/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

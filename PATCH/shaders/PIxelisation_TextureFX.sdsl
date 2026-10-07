@@ -1,0 +1,17 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+shader PIxelisation_TextureFX : TextureFX
+{
+   SamplerState samplerState{Filter = MIN_MAG_MIP_LINEAR;};
+   float resx;
+   float resy;
+    stage override float4 Shading()
+    {
+    float2 uv = (streams.TexCoord.xy);
+    float2 tt = float2(resx,resy);
+    float2 uu = floor(uv*tt)/tt;
+    float4 r = Texture0.SampleLevel(samplerState,uu,0);
+        return r;
+    }
+};

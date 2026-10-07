@@ -1,0 +1,47 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+[WantsMips("Texture0")]
+shader Pose02_TextureFX : TextureFX, Global
+{
+   SamplerState samplerState
+{
+Filter = MIN_MAG_MIP_LINEAR;
+
+};
+float p[340];
+
+ int2 res;
+int nb;
+
+ float map(float low1, float low2, float high1, float high2, float value) { return low2 + (value - low1) * (high2 - low2) / (high1 - low1); }
+    stage override float4 Shading()
+    {
+    float2 uv = (streams.TexCoord.xy);
+    float2 nez =float2(p[0],1.-p[1]);
+    float2 oe1 =float2(p[2],1.-p[3]);
+    float2 oe2 =float2(p[4],1.-p[5]);
+    float2 or1 =float2(p[6],1.-p[7]);
+    float2 or2 =float2(p[8],1.-p[9]);
+    float2 ep1 =float2(p[10],1.-p[11]);
+    float2 ep2 =float2(p[12],1.-p[12]);
+    float z  =distance(or1,or2);
+    float z2  =distance(oe1,oe2)*2.;
+    float2 ut = uv;
+      //  float2 ut = float2(map(0.,nez.x-z,1.,nez.x+z,uv.x),map(0.,nez.y-z,1.,nez.y+z,uv.y));   
+     //  ut = lerp(float2(ut.x,0.),ut,step(ut.y,oe1.y));
+        float3 c1 = Texture0.SampleLevel(samplerState, ut, 0).xyz;
+        c1 += smoothstep(0.001,0.,distance(ut,nez));
+        c1 += smoothstep(0.001,0.,distance(ut,oe1));
+        c1 += smoothstep(0.001,0.,distance(ut,oe2));
+        c1 += smoothstep(0.001,0.,distance(ut,or1));
+        c1 += smoothstep(0.001,0.,distance(ut,or2));
+        c1 += smoothstep(0.001,0.,distance(ut,ep1));
+        c1 += smoothstep(0.001,0.,distance(ut,ep2));
+        c1 += smoothstep(0.001,0.,distance(ut,nez+float2(0.,pow(distance(lerp(oe1,oe2,0.5),nez),0.8))));
+        //c1 += smoothstep(0.001,0.,distance(ut,oe2+float2(0.,distance(oe2,nez)*2.)));
+      
+    
+                return float4(c1,1.);
+    }
+};

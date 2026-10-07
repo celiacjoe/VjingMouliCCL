@@ -1,0 +1,59 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+[WantsMips("Texture0")]
+shader Face02_TextureFX : TextureFX , Global
+{
+ SamplerState samplerState
+{
+Filter = MIN_MAG_MIP_LINEAR;
+AddressU = Mirror;
+    AddressV = mirror;
+};
+ SamplerState samplerState2
+{
+Filter = MIN_MAG_MIP_POINT;
+AddressU = Mirror;
+    AddressV = mirror;
+};
+float nb;
+float _data[40];
+float composition;
+int start;
+float2 res;
+//float mix;
+//float mask1;
+//float mask2;
+//float fusion;
+float map(float low1, float low2, float high1, float high2, float value) { return low2 + (value - low1) * (high2 - low2) / (high1 - low1); }
+float map2(float low1, float high1, float value) { return  (value - low1) / (high1 - low1); }
+float rd(float2 p) { return frac(sin(dot(floor(p), float2(45.6, 98.6)))*7845.323+Time); }
+float rd(float p) { return frac(sin(dot(floor(p),45.236))*7845.323+Time); }
+/*float hs(float2 uv) { float2 u = uv * float2(1920., 1080.) / 1024.; return sin(Texture2.SampleLevel(samplerState,u, 0).x*6.28318530718 + Time*24.)*0.5 + 0.5; }*/
+			float hn(float2 uv) { float2 u = uv * float2(1920., 1080.) / 1024.; return Texture2.SampleLevel(samplerState,u, 0).x; }
+float ov(float a, float b) {
+				return a > 0.5 ? 2.*a*b : 1. - 2.*(1. - a)*(1. - b);
+			}
+ float li(float2 a, float2 b,float2 p){ float2 ba  = b-a; float2 pa = p-a; float h=  clamp(dot(pa,ba)/dot(ba,ba),0.,1.);
+                return length(pa-ba*h);}
+    stage override float4 Shading()
+    {
+        float2 uv = (streams.TexCoord.xy);
+
+	float d1 = _data[1] - _data[0];
+	float d2 = _data[2] - _data[0];
+	float fac2 = d2 / d1;
+	float2 uv2;
+	if(res.x>res.y){uv2 = float2(map(0., _data[start]-d1*fac2,1., _data[start+2]+d1*fac2, uv.x), map(0., _data[start+1], 1., _data[start+3],uv.y));}
+	else{uv2 =float2(map(0.,_data[0],1., _data[start+2], uv.x),  map(0., _data[start+1]-d1*fac2, 1., _data[start+3]+d1*fac2,uv.y));}
+	float4 t2 = Texture0.SampleLevel(samplerState, uv2 , 0);
+	float2 uv3 = float2(map(0., _data[start] , 1., _data[start+2], uv.x), map(0., _data[start+1], 1., _data[start+3],  uv.y));
+	float4 t3 = Texture0.SampleLevel(samplerState, uv3 , 0);
+	float4 t4 = lerp(t2,t3,step(0.5,composition));
+	/*float4 t5 = lerp(t4,Texture0.SampleLevel(samplerState, uv , 0),
+	lerp(
+	lerp(float4(mix,mix,mix,mix),smoothstep(mask1,mask2,t4),step(1.,fusion)),
+	Texture2.SampleLevel(samplerState, uv , 0),step(2.,fusion)));*/
+        return t4 ;
+    }
+};

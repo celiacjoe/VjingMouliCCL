@@ -1,0 +1,83 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+shader Face01_TextureFX : TextureFX, Global
+{
+  SamplerState samplerState
+{
+Filter = MIN_MAG_MIP_LINEAR;
+AddressU = Mirror;
+    AddressV = mirror;
+};
+float nb;
+float _data[40];
+float map(float low1, float low2, float high1, float high2, float value) { return low2 + (value - low1) * (high2 - low2) / (high1 - low1); }
+float map2(float low1, float high1, float value) { return  (value - low1) / (high1 - low1); }
+float3 rgbtohsl(float3 color)
+{
+    float maxc = max(color.r, max(color.g, color.b));
+    float minc = min(color.r, min(color.g, color.b));
+    float delta = maxc - minc;
+
+    float h = 0.0;
+    if (delta > 1e-5)
+    {
+        if (maxc == color.r)
+            h = fmod(((color.g - color.b) / delta), 6.0);
+        else if (maxc == color.g)
+            h = ((color.b - color.r) / delta) + 2.0;
+        else
+            h = ((color.r - color.g) / delta) + 4.0;
+
+        h /= 6.0;
+        if (h < 0.0) h += 1.0;
+    }
+
+    float l = (maxc + minc) * 0.5;
+    float s = 0.0;
+    if (delta > 1e-5)
+        s = delta / (1.0 - abs(2.0 * l - 1.0));
+
+    return float3(h, s, l);
+}
+float3 hsltorgb(float3 hsl)
+{
+    float h = hsl.x;
+    float s = hsl.y;
+    float l = hsl.z;
+
+    float c = (1.0 - abs(2.0 * l - 1.0)) * s;
+    float x = c * (1.0 - abs(fmod(h * 6.0, 2.0) - 1.0));
+    float m = l - c * 0.5;
+
+    float3 rgb;
+    if (h < 1.0/6.0)      rgb = float3(c, x, 0);
+    else if (h < 2.0/6.0) rgb = float3(x, c, 0);
+    else if (h < 3.0/6.0) rgb = float3(0, c, x);
+    else if (h < 4.0/6.0) rgb = float3(0, x, c);
+    else if (h < 5.0/6.0) rgb = float3(x, 0, c);
+    else                  rgb = float3(c, 0, x);
+
+    return rgb + m;
+}
+float rd(float t){ return frac(sin(floor(t)*45.)*785.236);}
+    stage override float4 Shading()
+    {
+        float2 uv = (streams.TexCoord.xy);
+        float4 t = Texture0.SampleLevel(samplerState, uv , 0);
+        float3 t2 = t.xyz;
+        
+        float3 col = rgbtohsl(t2);
+
+        for(int  i = 0 ; i < nb ; i++){
+        int aa = i*4;
+        float d1 = _data[aa]; float d2 = _data[2+aa]; float d3 = _data[1+aa]; float d4 = _data[3+aa];
+        float2 u = float2(map(d1,0.,d2,1.,uv.x),map(d3,0.,d4,1.,uv.y));
+        float2 ta = Texture1.SampleLevel(samplerState, u, 0).xy;
+        float3 ra = hsltorgb(float3(col.xy,ta.x)); 
+         t2 = lerp(t2,ra, ta.y*step(d1,uv.x)* step(uv.x,d2)* step(d3,uv.y)* step(uv.y,d4));
+        //t2 = ra;
+         }
+        return float4(t2,1.);
+    }
+};

@@ -1,0 +1,18 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+shader DataMoshingFinal_TextureFX : TextureFX, Global
+{
+SamplerState samplerState{Filter = MIN_MAG_MIP_LINEAR;};
+    
+
+    stage override float4 Shading()
+    {
+    float2 uv = (streams.TexCoord.xy);
+     float threshold = 0.1 * (1.0 - exp(-0.2*Time));
+    float4 delta = Texture0.SampleLevel(samplerState,uv,0);
+    
+    if (abs(delta.x - delta.w) < threshold) discard;
+        return Texture1.SampleLevel(samplerState,uv,0);;
+    }
+};

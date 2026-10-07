@@ -1,0 +1,40 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+shader DataMoshing02_TextureFX : TextureFX, Global
+{
+SamplerState samplerState{Filter = MIN_MAG_MIP_LINEAR;};
+    float hash11(float p) {
+    p = frac(p * .1031);
+    p *= p + 33.33;
+    p *= p + p;
+    return frac(p);
+}
+
+float hash12(float2 p) {
+	float3 p3  = frac(float3(p.xyx) * .1031);
+    p3 += dot(p3, p3.yzx + 33.33);
+    return frac((p3.x + p3.y) * p3.z);
+}
+
+
+    stage override float4 Shading()
+    {
+        float2 uv = (streams.TexCoord.xy);
+    float4 r ; 
+    float time = Time*100.; 
+    float index = floor(time);
+    float chunk = 100.;
+    
+    bool spawn = hash12(floor(uv*hash11(index+80.)*chunk)+index) > 0.9;
+    
+    if ( spawn) {
+        r = Texture1.SampleLevel(samplerState,uv,0);
+    }
+    else {
+        r = Texture0.SampleLevel(samplerState,uv,0);
+    }
+
+        return r;
+    }
+};

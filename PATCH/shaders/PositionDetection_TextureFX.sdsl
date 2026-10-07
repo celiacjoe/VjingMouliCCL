@@ -1,0 +1,24 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+shader PositionDetection_TextureFX : TextureFX
+{
+    SamplerState samplerState
+{
+Filter = MIN_MAG_MIP_LINEAR;
+AddressU = Mirror;
+    AddressV = mirror;
+};
+float2 pos;
+float zoom;
+float couleur;
+float cha1;float cha2;
+    stage override float4 Shading()
+    {
+    float2 uv = (streams.TexCoord.xy);
+    float2 ut = pos+ (uv-0.5)*zoom;
+     float3 t = Texture0.SampleLevel(samplerState, ut, 0).xyz;
+     float3 t2 = lerp(t,3.*abs(1.-2.*frac((1.-t*cha1)+cha2+float3(0.,-1./3.,1./3.)))-1.,couleur);
+        return float4(t2,1.);
+    }
+};

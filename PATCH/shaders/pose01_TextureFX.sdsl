@@ -1,0 +1,37 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+[WantsMips("Texture0")]
+shader pose01_TextureFX : TextureFX, Global
+{
+SamplerState samplerState
+{
+Filter = MIN_MAG_MIP_LINEAR;
+
+};
+float p[340];
+
+int2 res;
+int nb;
+
+ float map(float low1, float low2, float high1, float high2, float value) { return low2 + (value - low1) * (high2 - low2) / (high1 - low1); }
+    stage override float4 Shading()
+    {
+    float2 uv = (streams.TexCoord.xy);
+      
+       
+       float2 pp =float2(p[0],1.-p[1]);
+      
+       float2 z  = 0.5*(1.-frac(Time));
+        float2 ut = float2(map(0.,pp.x-z.x,1.,pp.x+z,uv.x),map(0.,pp.y-z,1.,pp.y+z.y,uv.y));       
+       
+       float2 uf = uv;
+        if(nb>0){uf = ut;}
+
+        float3 c1 = Texture0.SampleLevel(samplerState, uf, 0).xyz;
+
+      
+    
+                return float4(c1,1.);
+    }
+};

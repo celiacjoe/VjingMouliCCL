@@ -1,0 +1,27 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+shader displacement_TextureFX : TextureFX
+{
+    SamplerState samplerState
+{
+Filter = MIN_MAG_MIP_LINEAR;
+AddressU = Mirror;
+    AddressV = mirror;
+};
+float fac;
+    stage override float4 Shading()
+    {
+     float2 uv = (streams.TexCoord.xy);
+     float3 t = Texture0.SampleLevel(samplerState, uv, 0).xyz;
+     float2 uc = (uv-0.5)*0.05*pow(fac,2.);
+     float3 c = float3(0.,0.,0.);
+     for(int i = 0 ; i < 40 ; i++){
+     float d = i / 40.;
+     uv -= uc;
+     c = Texture0.SampleLevel(samplerState, uv, 0).xyz;
+     if(dot(c,1.)<d){break;}
+     }
+        return float4(c,1.);
+    }
+};

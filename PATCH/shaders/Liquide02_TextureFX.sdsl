@@ -1,0 +1,20 @@
+[TextureSource]
+[Category("Source")]
+[Summary("")]
+shader Liquide02_TextureFX : TextureFX
+{
+      SamplerState samplerState
+{
+Filter = MIN_MAG_MIP_LINEAR;
+};
+float _deformation;
+float bor;
+    stage override float4 Shading()
+    {
+    float2 uv  = streams.TexCoord.xy;
+    float md = smoothstep(0.,bor,uv.x)*smoothstep(1.,1.-bor,uv.x)*smoothstep(0.,bor,uv.y)*smoothstep(1.,1.-bor,uv.y);
+    float2 def = Texture1.SampleLevel(samplerState,uv,0).xy*_deformation*0.1*md;
+    float4 r =  Texture0.SampleLevel(samplerState,uv + def ,0);
+        return r;
+    }
+};
