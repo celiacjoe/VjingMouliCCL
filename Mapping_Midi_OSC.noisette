@@ -35,32 +35,32 @@
   "layout": {
     "mainLayout": {
       "type": 1,
-      "width": 1281,
-      "height": 630,
+      "width": 1265,
+      "height": 614,
       "direction": 2,
       "shifters": [
         {
           "type": 1,
-          "width": 1281,
-          "height": 630,
+          "width": 1265,
+          "height": 614,
           "direction": 2,
           "shifters": [
             {
               "type": 1,
-              "width": 1281,
-              "height": 355,
+              "width": 1265,
+              "height": 347,
               "direction": 1,
               "shifters": [
                 {
                   "type": 1,
                   "width": 307,
-                  "height": 355,
+                  "height": 347,
                   "direction": 2,
                   "shifters": [
                     {
                       "type": 0,
                       "width": 307,
-                      "height": 253,
+                      "height": 249,
                       "currentContent": "Modules",
                       "tabs": [
                         {
@@ -71,7 +71,7 @@
                     {
                       "type": 0,
                       "width": 307,
-                      "height": 96,
+                      "height": 92,
                       "currentContent": "Custom Variables",
                       "tabs": [
                         {
@@ -83,8 +83,8 @@
                 },
                 {
                   "type": 0,
-                  "width": 645,
-                  "height": 355,
+                  "width": 629,
+                  "height": 347,
                   "currentContent": "State Machine",
                   "tabs": [
                     {
@@ -104,7 +104,7 @@
                 {
                   "type": 0,
                   "width": 317,
-                  "height": 355,
+                  "height": 347,
                   "currentContent": "Inspector",
                   "tabs": [
                     {
@@ -116,14 +116,14 @@
             },
             {
               "type": 1,
-              "width": 1281,
-              "height": 269,
+              "width": 1265,
+              "height": 261,
               "direction": 1,
               "shifters": [
                 {
                   "type": 0,
                   "width": 150,
-                  "height": 269,
+                  "height": 261,
                   "currentContent": "Sequences",
                   "tabs": [
                     {
@@ -133,8 +133,8 @@
                 },
                 {
                   "type": 0,
-                  "width": 948,
-                  "height": 269,
+                  "width": 932,
+                  "height": 261,
                   "currentContent": "Sequence Editor",
                   "tabs": [
                     {
@@ -145,7 +145,7 @@
                 {
                   "type": 0,
                   "width": 171,
-                  "height": 269,
+                  "height": 261,
                   "currentContent": "Logger",
                   "tabs": [
                     {
@@ -234,7 +234,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 0,
+              "value": 74,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -252,7 +252,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 68,
+              "value": 44,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -270,7 +270,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 84,
+              "value": 72,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -288,7 +288,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 9,
+              "value": 110,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -306,7 +306,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 72,
+              "value": 39,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -324,7 +324,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 60,
+              "value": 0,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -342,7 +342,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 65,
+              "value": 0,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -360,7 +360,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 1,
+              "value": 0,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -378,7 +378,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 0,
+              "value": 45,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -414,7 +414,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 0,
+              "value": 127,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -432,7 +432,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 0,
+              "value": 127,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -450,7 +450,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 0,
+              "value": 23,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -522,7 +522,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 47,
+              "value": 45,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -594,7 +594,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 92,
+              "value": 36,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -666,7 +666,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 66,
+              "value": 122,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -684,7 +684,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 0,
+              "value": 127,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -720,7 +720,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 127,
+              "value": 0,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -738,7 +738,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 58,
+              "value": 0,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -810,7 +810,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 53,
+              "value": 0,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -846,7 +846,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 127,
+              "value": 0,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -882,7 +882,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 39,
+              "value": 4,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -918,7 +918,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 127,
+              "value": 0,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -936,7 +936,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 0,
+              "value": 127,
               "minValue": 0,
               "maxValue": 127,
               "default": 0,
@@ -1243,14 +1243,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.0,
+                                "value": 0.5826771855354309,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.0,
+                              "value": 0.5826771855354309,
                               "controlAddress": "/states/midi/processors/1/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -1363,14 +1363,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.0,
+                                "value": 0.3543307185173035,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.0,
+                              "value": 0.3543307185173035,
                               "controlAddress": "/states/midi/processors/10/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -1603,14 +1603,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.0,
+                                "value": 1.0,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.0,
+                              "value": 1.0,
                               "controlAddress": "/states/midi/processors/12/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -1723,14 +1723,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.0,
+                                "value": 1.0,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.0,
+                              "value": 1.0,
                               "controlAddress": "/states/midi/processors/13/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -1843,14 +1843,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.5354330539703369,
+                                "value": 0.3464567065238953,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.5354330539703369,
+                              "value": 0.3464567065238953,
                               "controlAddress": "/states/midi/processors/2/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -1963,14 +1963,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.0,
+                                "value": 0.1811023652553558,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.0,
+                              "value": 0.1811023652553558,
                               "controlAddress": "/states/midi/processors/20/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -2443,14 +2443,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.6614173054695129,
+                                "value": 0.5669291615486145,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.6614173054695129,
+                              "value": 0.5669291615486145,
                               "controlAddress": "/states/midi/processors/3/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -2563,14 +2563,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.3700787425041199,
+                                "value": 0.3543307185173035,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.3700787425041199,
+                              "value": 0.3543307185173035,
                               "controlAddress": "/states/midi/processors/30/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -3159,6 +3159,26 @@
                       "paramLinks": {
                       },
                       "argManager": {
+                        "items": [
+                          {
+                            "parameters": [
+                              {
+                                "value": 0.2834645807743073,
+                                "controlAddress": "/#1"
+                              }
+                            ],
+                            "niceName": "#1",
+                            "type": "Float",
+                            "param": {
+                              "value": 0.2834645807743073,
+                              "controlAddress": "/states/midi/processors/40/outputs/mappingOutput/command/arguments/#1/#1"
+                            },
+                            "paramLink": {
+                              "linkType": 1,
+                              "mappingValueIndex": 0
+                            }
+                          }
+                        ],
                         "viewOffset": [
                           0,
                           0
@@ -3623,14 +3643,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.5669291615486145,
+                                "value": 0.3070866167545319,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.5669291615486145,
+                              "value": 0.3070866167545319,
                               "controlAddress": "/states/midi/processors/5/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -3743,14 +3763,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.5196850299835205,
+                                "value": 0.960629940032959,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.5196850299835205,
+                              "value": 0.960629940032959,
                               "controlAddress": "/states/midi/processors/50/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -3863,14 +3883,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.0,
+                                "value": 1.0,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.0,
+                              "value": 1.0,
                               "controlAddress": "/states/midi/processors/51/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -3983,14 +4003,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.0,
+                                "value": 1.0,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.0,
+                              "value": 1.0,
                               "controlAddress": "/states/midi/processors/52/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -4223,14 +4243,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.4724409580230713,
+                                "value": 0.0,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.4724409580230713,
+                              "value": 0.0,
                               "controlAddress": "/states/midi/processors/6/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -4343,14 +4363,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.4566929042339325,
+                                "value": 0.0,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.4566929042339325,
+                              "value": 0.0,
                               "controlAddress": "/states/midi/processors/60/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -4823,14 +4843,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.5118110179901123,
+                                "value": 0.0,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.5118110179901123,
+                              "value": 0.0,
                               "controlAddress": "/states/midi/processors/7/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -4943,14 +4963,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.4173228442668915,
+                                "value": 0.0,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.4173228442668915,
+                              "value": 0.0,
                               "controlAddress": "/states/midi/processors/70/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -5303,14 +5323,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.0,
+                                "value": 1.0,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.0,
+                              "value": 1.0,
                               "controlAddress": "/states/midi/processors/73/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -5423,14 +5443,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.007874015718698502,
+                                "value": 0.0,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.007874015718698502,
+                              "value": 0.0,
                               "controlAddress": "/states/midi/processors/8/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -5543,14 +5563,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.3070866167545319,
+                                "value": 0.03149606287479401,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.3070866167545319,
+                              "value": 0.03149606287479401,
                               "controlAddress": "/states/midi/processors/80/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -5663,14 +5683,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.0,
+                                "value": 1.0,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.0,
+                              "value": 1.0,
                               "controlAddress": "/states/midi/processors/81/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
@@ -5903,14 +5923,14 @@
                           {
                             "parameters": [
                               {
-                                "value": 0.0,
+                                "value": 1.0,
                                 "controlAddress": "/#1"
                               }
                             ],
                             "niceName": "#1",
                             "type": "Float",
                             "param": {
-                              "value": 0.0,
+                              "value": 1.0,
                               "controlAddress": "/states/midi/processors/83/outputs/mappingOutput/command/arguments/#1/#1"
                             },
                             "paramLink": {
